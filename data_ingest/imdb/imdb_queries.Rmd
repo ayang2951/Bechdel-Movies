@@ -1,0 +1,47 @@
+---
+title: "MovieData.Rmd"
+output: html_document
+date: "2023-10-31"
+---
+
+## First, import necessary libraries.
+
+We use the `omdbapi` package, which is an API used for getting movie data, to obtain a dataset that we may analyze in conjunction with the Bechdel score movie dataset. We use the list of IMDB IDs gathered from the Bechdel dataset to make requests and obtain important statistics for each movie.
+
+```{r setup, include=FALSE}
+
+library(omdbapi)
+# API KEY: 396c71fd
+
+library(tidyverse)
+
+```
+
+## Obtaining Data
+
+We obtain the data for each movie, using the IMDb IDs present in the Bechdel dataset.
+
+```{r}
+
+# using the saved CSV file, we import the IMDb IDs we need
+imdb_ids = read.csv('imdb_ids.csv')
+
+movie_data <- as_tibble(find_by_id(imdb_ids[1, 1]))
+
+for (i in 2 : 10136) {
+  movie_data <- bind_rows(movie_data, as_tibble(find_by_id(imdb_ids[i, 1])))
+}
+
+movie_data_new <- apply(movie_data, 2, as.character)
+# write.csv(movie_data_new, "movie_data.csv")
+
+# write.csv(movie_data$Released, file = 'movie_data', sep = ',', row.names = FALSE)
+```
+
+```{r}
+
+movie_data2 <- movie_data %>% select(Title, Year, Released, Rated, Runtime, Genre, Director, Language, Country, imdbRating, imdbVotes, imdbID, BoxOffice)
+
+write.csv(movie_data2, "imdb_data.csv", row.names = FALSE)
+
+```
