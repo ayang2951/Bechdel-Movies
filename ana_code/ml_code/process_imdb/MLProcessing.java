@@ -26,34 +26,41 @@ public class MLProcessing {
             boolean include = true;
             String newline = new String("");
 
+            // if line is empty, don't include it
             if (line.length() == 0) {
                 include = false;
             }
 
+            // make sure the year value is proper
+            // remove the quotes
             if (cols[1].length() != 6) {
                 include = false;
             } else {
                 cols[1] = cols[1].substring(1, 5);
             }
 
+            // parse the date and remove the year
             if (cols[2].length() != 10) {
                 include = false;
             } else {
                 cols[2] = cols[2].substring(5);
             }
 
+            // make sure column is not "N/A"
             if (cols[9].length() == 0) {
                 include = false;
             } else if (cols[9].contains("N")) {
                 include = false;
             }
 
+            // make sure column is not "N/A"
             if (cols[10].length() == 0) {
                 include = false;
             } else if (cols[10].contains("N")) {
                 include = false;
             }
             
+            // make sure column is not "N/A"
             if (!(cols[11].contains("N"))) {
                 int ll = cols[11].length();
                 if (ll != 0) {
@@ -64,6 +71,8 @@ public class MLProcessing {
                 
             }
 
+            // process the box office data -- remove the | delimiter
+            // remove all excess values, make the value numeric
             if (cols[12].contains("N")) {
                 include = false;
 
@@ -87,6 +96,7 @@ public class MLProcessing {
                 }
             }
 
+            // get only the columns we want to analyze in the models
             if (include) {
                 newline += cols[1];
                 newline += ",";

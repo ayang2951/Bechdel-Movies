@@ -26,22 +26,28 @@ public class Clean {
 
             String newline = new String("");
 
+            // line contains "tt" prefix for imdbID
             if (line.contains("tt")) {
+                // imdbID is last occurrence of "tt"
                 int loc = line.lastIndexOf("tt");
 
                 String id = line.substring(loc + 2);
 
+                // try to turn the id into an integer -- should be all numeric
+                // turn the score into an integer
                 try {
                     int imdb_id = Integer.parseInt(id);
                     int score = Integer.parseInt(line.substring(5, 6));
                     int newscore = 0;
 
+                    // map value to binary pass/fail
                     if (score == 3) {
                         newscore = 1;
                     } else {
                         newscore = 0;
                     }
 
+                    // add the line of data to the output file
                     newline = line.substring(5, 6) + "," + String.valueOf(newscore) + "," + line.substring(loc + 2) + ",";
 
                 } catch (NumberFormatException e) {
