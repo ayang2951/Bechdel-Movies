@@ -120,10 +120,12 @@ Further Data Processing for Machine Learning
 Machine Learning Done in PySpark
     - File containing model building & output is in `BechdelProject/script`
 
-References
-DataSource
+## References
+
+### DataSource
 1. Bechdel Test Dataset: https://bechdeltest.com/
-2. IMDb Film Metrics Dataset: 
-Literature
+2. IMDb Film Metrics Dataset: `omdbapi` in R
+
+### Literature
 	1.https://aclanthology.org/N15-1084.pdf
 	2.INTERNATIONAL JOURNAL of ARTS MANAGEMENT
