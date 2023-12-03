@@ -32,8 +32,8 @@ Producing Results along with the joint dataset for **Bechdel Test Analysis** & *
 3. Run `Clean.java` MapReduce job from `cleaning` on `bechdel.csv`
 4. Perform code analysis on the cleaned output using `codeAnalysis.scala` through apache spark. 
 5. Join `bechdel.csv` and `movie_data.csv` using `joint.scala`, which will
-    - Join and output two datasets with selected columns.
-    - Cast columns to data types of our interests.  The output is `joint.csv`
+    - Parse movie_data with appropriate delimiter. Join and output two datasets with selected columns.
+    - Cast columns to data types of our interests. The output is `joint.csv`. Stored in directory **project/noutput** in hdfs. 
     - Perform individual analysis on `bechdel.csv`
     - Perform joint analysis on the joined dataset.
 6. See visualization of distributions in `joint.csv` using `visualization.ipynb`
