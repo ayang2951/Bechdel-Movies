@@ -44,7 +44,7 @@ val updatedBechdel = joinedData.select(
 )
 
 
-//output to csv
+//output to csv using the command below
 //updatedBechdel.coalesce(1).write.option("header", "true").csv("project/nnewoutput")
 
 val joined = updatedBechdel
@@ -101,7 +101,7 @@ val jointIntVotes = joined.withColumn("imdbVotes", col("imdbVotes").cast("int"))
 val jointWithFloatRating = jointIntVotes.withColumn("imdbRating", col("imdbRating").cast("float"))
  
 val joined = jointWithFloatRating
-//need to fix min and max here. cuz entries all in string
+//rating distribution grouped by bechdel score with mean and std listed
 val ratingDist = (joined.groupBy("Bechdel Score")
 	.agg(
 		count("imdbRating").as("Count"),
@@ -109,7 +109,7 @@ val ratingDist = (joined.groupBy("Bechdel Score")
 		max("imdbRating").as("MaxRating"),
 		avg("imdbRating").as("AvgRating"),
 		stddev("imdbRating").as("StdDevRating")))
-
+//votes distribution grouped by bechdel score with mean and std listed
 val votesDist = (joined.groupBy("Bechdel Score")
 	.agg(
 		count("imdbVotes").as("Count"),
@@ -117,7 +117,7 @@ val votesDist = (joined.groupBy("Bechdel Score")
 		max("imdbVotes").as("MaxVotes"),
 		avg("imdbVotes").as("AvgVotes"),
 		stddev("imdbVotes").as("StdDevVotes")))
-
+//rating distribution grouped by decade and bechdel score with mean and std listed
 val newratingDist = (joined.groupBy("decade", "Bechdel Score")
   .agg(
     count("Bechdel Score").as("Count"),
@@ -127,7 +127,7 @@ val newratingDist = (joined.groupBy("decade", "Bechdel Score")
     stddev("imdbRating").as("StdDevRating")
   )
   .orderBy("decade", "Bechdel Score"))
-
+//votes distribution grouped by bechdel score with mean and std listed
 val newvotesDist = (joined.groupBy("decade","Bechdel Score")
 	.agg(
 		count("imdbVotes").as("Count"),
