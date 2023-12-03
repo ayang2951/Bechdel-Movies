@@ -107,7 +107,7 @@ Profiling
 Further Data Processing for Machine Learning
 - Further data processing was needed for both datasets for the machine learning component of this project
 - Bechdel dataset processing:
-    - Input data is **BechdelProject/input_data/bechdel_data.csv*
+    - Input data is **BechdelProject/input_data/bechdel_data.csv**
     - Clean.java is in `BechdelProject/ProjectCode/process_bechdel`
     - Clean.java parses the csv and extracts the two columns we need: the Bechdel rating and the imdbID for the join
     - Output data is in **BechdelProject/clean_bechdel/bechdel_clean.csv**
