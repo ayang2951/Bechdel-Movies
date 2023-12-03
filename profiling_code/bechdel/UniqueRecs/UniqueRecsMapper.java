@@ -17,7 +17,9 @@ public class UniqueRecsMapper
         public void map(Object key, Text value, Context context
         ) throws IOException, InterruptedException {
             String line = value.toString();
+            //split by comma, but make sure to escape those in the field
             String [] arr = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
+            //select columns of interests
             String col = "Title: "+ arr[0] + " Year " + arr[1] + " Bechdel Score " + arr[2] + " Dubious Score "+ arr[3];
             Text columns = new Text(col);
             context.write(columns,NullWritable.get());
